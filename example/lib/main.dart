@@ -275,6 +275,7 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   picker.DatePicker.showPicker(context,
                       theme: picker.DatePickerTheme(
+                        containerHeight: 230,
                         cancelStyle: TextStyle(color: Colors.white),
                           itemStyle: TextStyle(
                               color: Colors.white,
