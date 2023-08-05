@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_datetime_picker_plus/src/date_format.dart';
 import 'package:flutter_datetime_picker_plus/src/i18n_model.dart';
 
@@ -39,12 +40,15 @@ abstract class BasePickerModel {
 
   //return left divider string
   String leftDivider();
+  Widget? leftDividerWidget();
 
   //return right divider string
   String rightDivider();
+  Widget? rightDividerWidget();
 
   //layout proportions for 3 columns
   List<int> layoutProportions();
+  String? actionTitle();
 }
 
 //a base class for picker data model
@@ -125,6 +129,24 @@ class CommonPickerModel extends BasePickerModel {
   @override
   DateTime? finalTime() {
     return null;
+  }
+
+  @override
+  Widget? leftDividerWidget() {
+    // TODO: implement leftDividerWidget
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget? rightDividerWidget() {
+    // TODO: implement rightDividerWidget
+    return null;
+  }
+
+  @override
+  String? actionTitle() {
+    // TODO: implement actionTitle
+    throw UnimplementedError();
   }
 }
 

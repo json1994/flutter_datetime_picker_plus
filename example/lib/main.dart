@@ -12,27 +12,57 @@ class CustomPicker extends picker.CommonPickerModel {
   CustomPicker({DateTime? currentTime, picker.LocaleType? locale})
       : super(locale: locale) {
     this.currentTime = currentTime ?? DateTime.now();
-    this.setLeftIndex(this.currentTime.hour);
-    this.setMiddleIndex(this.currentTime.minute);
-    this.setRightIndex(this.currentTime.second);
+    this.setLeftIndex(this.currentTime.year);
+    this.setMiddleIndex(this.currentTime.month);
+    this.setRightIndex(this.currentTime.month);
   }
 
   @override
   String? leftStringAtIndex(int index) {
-    if (index >= 0 && index < 24) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
+    return '$index';
   }
 
   @override
   String? middleStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
+    if (index < 1 || index > 12) return null;
+    return '$index';
+  }
+
+  @override
+  Widget? leftDividerWidget() {
+    // TODO: implement leftDividerWidget
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.only(
+        left: 10,
+      ),
+      height: 44,
+      child: Text(
+        '年',
+        style: TextStyle(color: Color(0xff92969A), fontSize: 13),
+      ),
+      decoration: BoxDecoration(
+          border: Border(
+        left: BorderSide(color: Color(0xff3B3D3F)),
+      )),
+    );
+  }
+
+  @override
+  Widget? rightDividerWidget() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.only(
+        left: 10,
+      ),
+      height: 44,
+      child:
+          Text('月', style: TextStyle(color: Color(0xff92969A), fontSize: 13)),
+      decoration: BoxDecoration(
+          border: Border(
+        left: BorderSide(color: Color(0xff3B3D3F)),
+      )),
+    );
   }
 
   @override
@@ -42,6 +72,12 @@ class CustomPicker extends picker.CommonPickerModel {
     } else {
       return null;
     }
+  }
+
+  @override
+  String? actionTitle() {
+    // TODO: implement actionTitle
+    return '选择日期';
   }
 
   @override
@@ -56,7 +92,7 @@ class CustomPicker extends picker.CommonPickerModel {
 
   @override
   List<int> layoutProportions() {
-    return [1, 2, 1];
+    return [1, 1, 0];
   }
 
   @override
@@ -237,8 +273,15 @@ class HomePage extends StatelessWidget {
                 )),
             TextButton(
                 onPressed: () {
-                  picker.DatePicker.showPicker(context, showTitleActions: true,
-                      onChanged: (date) {
+                  picker.DatePicker.showPicker(context,
+                      theme: picker.DatePickerTheme(
+                        cancelStyle: TextStyle(color: Colors.white),
+                          itemStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 22),
+                          backgroundColor: Color(0xff1F2123)),
+                      showTitleActions: true, onChanged: (date) {
                     print('change $date in time zone ' +
                         date.timeZoneOffset.inHours.toString());
                   }, onConfirm: (date) {
