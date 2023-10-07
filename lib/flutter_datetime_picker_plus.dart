@@ -301,7 +301,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
         animation: widget.route.animation!,
         builder: (BuildContext context, Widget? child) {
           final double bottomPadding = MediaQuery.of(context).padding.bottom;
-          return ClipRect(
+          return ClipRRect(
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(15.w),  topRight: Radius.circular(15.w)),
             child: CustomSingleChildLayout(
               delegate: _BottomPickerLayout(
                 widget.route.animation!.value,
@@ -311,8 +312,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
               ),
               child: GestureDetector(
                 child: Material(
-                  color: theme.backgroundColor,
-                  child: _renderPickerView(theme),
+                  color: Colors.transparent,
+                  child: ClipRRect(borderRadius: BorderRadius.only(topLeft: Radius.circular(15.w),  topRight: Radius.circular(15.w)), child: DecoratedBox(decoration: BoxDecoration(color: Colors.white), child: _renderPickerView(theme),),),
                 ),
               ),
             ),
@@ -532,7 +533,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return Container(
       height: 60.w,
       decoration: BoxDecoration(
-        color: theme.headerColor ?? theme.backgroundColor,
+        color: Colors.white,
+        borderRadius: BorderRadius.only(topRight: Radius.circular(15.w), topLeft: Radius.circular(15.w))
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
