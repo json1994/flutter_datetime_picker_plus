@@ -49,6 +49,13 @@ abstract class BasePickerModel {
   //layout proportions for 3 columns
   List<int> layoutProportions();
   String? actionTitle();
+
+  String? datePickerTitle(){
+   return null;
+  }
+  String? datePickerConfirmTitle(){
+    return null;
+  }
 }
 
 //a base class for picker data model
@@ -154,11 +161,14 @@ class CommonPickerModel extends BasePickerModel {
 class DatePickerModel extends CommonPickerModel {
   late DateTime maxTime;
   late DateTime minTime;
-
+  final String? title;
+  final String? submit;
   DatePickerModel(
       {DateTime? currentTime,
       DateTime? maxTime,
       DateTime? minTime,
+        this.title,
+        this.submit,
       LocaleType? locale})
       : super(locale: locale) {
     this.maxTime = maxTime ?? DateTime(2049, 12, 31);
@@ -400,6 +410,10 @@ class DatePickerModel extends CommonPickerModel {
   DateTime finalTime() {
     return currentTime;
   }
+  @override
+  String? datePickerConfirmTitle() => submit;
+  @override
+  String? datePickerTitle() => title;
 }
 
 //a time picker model

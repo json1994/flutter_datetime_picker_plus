@@ -280,20 +280,20 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   picker.DatePicker.showPicker(context,
                       theme: picker.DatePickerTheme(
-                        containerHeight: 250,
+                        containerHeight: 300.w,
                         cancelStyle: TextStyle(color: Colors.white),
                           itemStyle: TextStyle(
                               color: Color(0xff333333),
                               fontWeight: FontWeight.w500,
                               fontSize: 25.sp),
                           backgroundColor: Colors.white),
-                      showTitleActions: false, onChanged: (date) {
+                      showTitleActions: true, onChanged: (date) {
                     print('change $date in time zone ' +
                         date.timeZoneOffset.inHours.toString());
                   }, onConfirm: (date) {
                     print('confirm $date');
                   },
-                      pickerModel: DatePickerModel(),
+                      pickerModel: DatePickerModel(title: "Birthday", submit: "Confirm"),
                       locale: picker.LocaleType.en);
                 },
                 child: Text(
