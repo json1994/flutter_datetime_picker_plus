@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
     as picker;
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() => runApp(new MyApp());
 
@@ -92,7 +94,7 @@ class CustomPicker extends picker.CommonPickerModel {
 
   @override
   List<int> layoutProportions() {
-    return [1, 1, 0];
+    return [1, 1, 1];
   }
 
   @override
@@ -119,13 +121,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: new HomePage(),
-    );
+    return ScreenUtilInit(builder: (context, child) {
+      return MaterialApp(
+        title: 'Flutter Demo',
+        theme: new ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: new HomePage(),
+      );
+    },
+      designSize: const Size(430, 812),);
   }
 }
 
@@ -275,20 +280,20 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   picker.DatePicker.showPicker(context,
                       theme: picker.DatePickerTheme(
-                        containerHeight: 230,
+                        containerHeight: 250,
                         cancelStyle: TextStyle(color: Colors.white),
                           itemStyle: TextStyle(
-                              color: Colors.white,
+                              color: Color(0xff333333),
                               fontWeight: FontWeight.w500,
-                              fontSize: 22),
-                          backgroundColor: Color(0xff1F2123)),
-                      showTitleActions: true, onChanged: (date) {
+                              fontSize: 25.sp),
+                          backgroundColor: Colors.white),
+                      showTitleActions: false, onChanged: (date) {
                     print('change $date in time zone ' +
                         date.timeZoneOffset.inHours.toString());
                   }, onConfirm: (date) {
                     print('confirm $date');
                   },
-                      pickerModel: CustomPicker(currentTime: DateTime.now()),
+                      pickerModel: DatePickerModel(),
                       locale: picker.LocaleType.en);
                 },
                 child: Text(

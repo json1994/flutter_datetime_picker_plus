@@ -227,10 +227,16 @@ class DatePickerModel extends CommonPickerModel {
     int maxDay = _maxDayOfCurrentMonth();
     int minDay = _minDayOfCurrentMonth();
     this.rightList = List.generate(maxDay - minDay + 1, (int index) {
-      return '${minDay + index}${_localeDay()}';
+      try {
+        return "${digits(minDay + index, 2)}${_localeDay()}";
+      }catch (e) {
+        return '${minDay + index}${_localeDay()}';
+      }
     });
   }
-
+  String digits(int value, int length) {
+    return '$value'.padLeft(length, "0");
+  }
   @override
   void setLeftIndex(int index) {
     super.setLeftIndex(index);
@@ -375,7 +381,7 @@ class DatePickerModel extends CommonPickerModel {
     } else if (locale == LocaleType.ko) {
       return '$month월';
     } else {
-      List monthStrings = i18nObjInLocale(locale)['monthLong'] as List<String>;
+      List monthStrings = i18nObjInLocale(locale)['monthShort'] as List<String>;
       return monthStrings[month - 1];
     }
   }
