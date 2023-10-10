@@ -382,6 +382,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
             ),
           ),
         ),
+        SizedBox(height: 20.h,)
       ],
     );
   }
