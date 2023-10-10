@@ -121,16 +121,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(builder: (context, child) {
-      return MaterialApp(
-        title: 'Flutter Demo',
-        theme: new ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: new HomePage(),
-      );
-    },
-      designSize: const Size(430, 812),);
+    return ScreenUtilInit(
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: new ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: new HomePage(),
+        );
+      },
+      designSize: const Size(430, 812),
+    );
   }
 }
 
@@ -277,24 +279,21 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(color: Colors.blue),
                 )),
             TextButton(
-                onPressed: () {
-                  picker.DatePicker.showPicker(context,
+                onPressed: () async {
+                  var ret = await picker.DatePicker.showPicker(context,
                       theme: picker.DatePickerTheme(
-                        containerHeight: 300.w,
-                        cancelStyle: TextStyle(color: Colors.white),
+                          containerHeight: 300.w,
+                          cancelStyle: TextStyle(color: Colors.white),
                           itemStyle: TextStyle(
                               color: Color(0xff333333),
                               fontWeight: FontWeight.w500,
                               fontSize: 25.sp),
                           backgroundColor: Colors.white),
-                      showTitleActions: true, onChanged: (date) {
-                    print('change $date in time zone ' +
-                        date.timeZoneOffset.inHours.toString());
-                  }, onConfirm: (date) {
-                    print('confirm $date');
-                  },
-                      pickerModel: DatePickerModel(title: "Birthday", submit: "Confirm"),
+                      pickerModel:
+                          DatePickerModel(title: "Birthday", submit: "Confirm"),
                       locale: picker.LocaleType.en);
+
+                  print("select time: $ret");
                 },
                 child: Text(
                   'show custom time picker,\nyou can custom picker model like this',
